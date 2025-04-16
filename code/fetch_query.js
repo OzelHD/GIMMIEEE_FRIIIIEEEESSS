@@ -4,6 +4,15 @@
 let loading = false;
 let results = [];
 let error = null;
+let currentLang = "de";
+
+/**
+ * Button for language
+ */
+document.getElementById("langToggle").addEventListener("click", () => {
+  currentLang = currentLang === "de" ? "en" : "de";
+  document.getElementById("langToggle").textContent = `Sprache: ${currentLang === "de" ? "Deutsch" : "English"}`;
+});
 
 /**
  * Highlights the word "pommes" (case-insensitive) by wrapping it with a span
@@ -24,11 +33,11 @@ async function fetchPommes() {
   updateUI();
 
   const FACILITY_ID_TO_NAME = {
-    3: "Clausius-Bar",
-    5: "Dozentenfoyer",
-    7: "Food&Lab",
-    8: "Archimedes",
-    9: "Polyterasse",
+    3:  "Clausius-Bar",
+    5:  "Dozentenfoyer",
+    7:  "Food&Lab",
+    8:  "Archimedes",
+    9:  "Polyterasse",
     10: "Polysnack",
     11: "Tannenbar",
     14: "Alumni quattro Lounge",
@@ -37,8 +46,10 @@ async function fetchPommes() {
     18: "food market - grill bbQ",
     19: "food market - pizza pasta day",
     20: "Fusion meal",
-    21: "Octavo",
-    23: "Dozentenfoyer 2",
+    22: "Rice-UP",
+    23: "Octavo",
+    27: "Science Lounge (ACHTUNG, in Basel)",
+    28: "Flavour Kitchen (ACHTUNG, in Basel)"
   };
 
   try {
@@ -57,7 +68,7 @@ async function fetchPommes() {
     const mondayPlus14Str = mondayPlus14.toISOString().split("T")[0];
 
     // Build API URL with required query parameters
-    const url = `https://idapps.ethz.ch/cookpit-pub-services/v1/weeklyrotas?client-id=ethz-wcms&lang=de&rs-first=0&rs-size=50&valid-after=${mondayStr}&valid-before=${mondayPlus14Str}`;
+    const url = `https://idapps.ethz.ch/cookpit-pub-services/v1/weeklyrotas?client-id=ethz-wcms&lang=${currentLang}&rs-first=0&rs-size=50&valid-after=${mondayStr}&valid-before=${mondayPlus14Str}`;
     const res = await fetch(url);
     const data = await res.json();
 
