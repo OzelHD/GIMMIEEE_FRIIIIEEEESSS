@@ -11,7 +11,7 @@ let currentLang = "de";
  */
 document.getElementById("langToggle").addEventListener("click", () => {
   currentLang = currentLang === "de" ? "en" : "de";
-  document.getElementById("langToggle").textContent = `Sprache: ${currentLang === "de" ? "Deutsch" : "English"}`;
+  document.getElementById("langToggle").textContent = `Sprache (noch nicht implementiert): ${currentLang === "de" ? "Deutsch" : "English"}`;
 });
 
 /**
@@ -90,7 +90,7 @@ async function fetchPommes() {
               const meal = line["meal"] || {};
               const name = (meal["name"] || "").toLowerCase();
               const description = (meal["description"] || "").toLowerCase();
-              const image = meal["image-url"] || null;
+              const image = meal["image-url"] ? `${meal["image-url"]}?client-id=ethz-wcms` : null;
               if (name.includes("pommes") || description.includes("pommes")) {
                 matches.push({
                   mensa,
