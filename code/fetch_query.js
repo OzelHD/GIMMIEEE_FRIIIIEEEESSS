@@ -1,17 +1,18 @@
-// /code/fetch_query.js
-
 // Global state variables
 let loading = false;
 let results = [];
 let error = null;
 let currentLang = "de";
 
+let query = "pommes";
+
 /**
  * Button for language
  */
 document.getElementById("langToggle").addEventListener("click", () => {
   currentLang = currentLang === "de" ? "en" : "de";
-  document.getElementById("langToggle").textContent = `Sprache (noch nicht implementiert): ${currentLang === "de" ? "Deutsch" : "English"}`;
+  query = query === "pommes" ? "fries" : "pommes";
+  document.getElementById("langToggle").textContent = ` ${currentLang === "de" ? "Sprache: Deutsch" : "Language: English"}`;
 });
 
 /**
@@ -20,10 +21,22 @@ document.getElementById("langToggle").addEventListener("click", () => {
  * @param {string} text
  * @returns {string}
  */
-function highlightPommes(text) {
-  return text.replace(/(pommes)/gi, '<strong class="text-yellow-500 font-bold">$1</strong>');
-}
 
+function highlightPommes(text) {
+  if (!text) return "";
+
+  //replace Fries with French fries
+  let replacementWord = query;
+  if (query.toLowerCase() === "fries") {
+    replacementWord = "French fries";
+  }
+
+  const safeQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // escape regex
+  const regex = new RegExp(`(${safeQuery})`, "gi");
+
+  // Replace matching words with highlighted <strong> version
+  return text.replace(regex, `<strong class="text-yellow-500 font-bold">${replacementWord}</strong>`);
+}
 
 async function fetchPommes() {
   console.log("🍟 Pommes Fetch Triggered!");
@@ -91,7 +104,7 @@ async function fetchPommes() {
               const name = (meal["name"] || "").toLowerCase();
               const description = (meal["description"] || "").toLowerCase();
               const image = meal["image-url"] ? `${meal["image-url"]}?client-id=ethz-wcms` : null;
-              if (name.includes("pommes") || description.includes("pommes")) {
+              if (name.includes(query) || description.includes(query)) {
                 matches.push({
                   mensa,
                   name: meal["name"] || "",
