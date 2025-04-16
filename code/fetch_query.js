@@ -11,7 +11,7 @@ let query = "pommes";
  */
 document.getElementById("langToggle").addEventListener("click", () => {
   currentLang = currentLang === "de" ? "en" : "de";
-  query = query === "pommes" ? "fries" : "pommes";
+  query = query === "pommes" ? "french fries" : "pommes";
   document.getElementById("langToggle").textContent = ` ${currentLang === "de" ? "Sprache: Deutsch" : "Language: English"}`;
 });
 
@@ -27,7 +27,7 @@ function highlightPommes(text) {
 
   //replace Fries with French fries
   let replacementWord = query;
-  if (query.toLowerCase() === "fries") {
+  if (query.toLowerCase() === "french fries") {
     replacementWord = "French fries";
   }
 
@@ -55,15 +55,15 @@ async function fetchPommes() {
     11: "Tannenbar",
     14: "Alumni quattro Lounge",
     16: "Bistro HPI",
-    17: "food market - green day",
-    18: "food market - grill bbQ",
-    19: "food market - pizza pasta day",
+    17: "Food market - green day",
+    18: "Food market - grill bbQ",
+    19: "Food market - pizza pasta day",
     20: "Fusion meal",
     21: "Mendokoro",
     22: "Rice-UP",
     23: "Octavo",
-    27: "Science Lounge (ACHTUNG, in Basel)",
-    28: "Flavour Kitchen (ACHTUNG, in Basel)"
+    27: "Science Lounge (Basel)",
+    28: "Flavour Kitchen (Basel)"
   };
 
   try {
