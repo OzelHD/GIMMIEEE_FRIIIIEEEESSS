@@ -44,7 +44,7 @@ async function fetchPommes() {
   error = null;
   results = [];
   updateUI();
-
+//still not done! try https://ethz.ch/de/campus/erleben/gastronomie-und-einkaufen/gastronomie/menueplaene.html
   const FACILITY_ID_TO_NAME = {
     3:  "Clausius-Bar",
     5:  "Dozentenfoyer",
@@ -59,6 +59,7 @@ async function fetchPommes() {
     18: "food market - grill bbQ",
     19: "food market - pizza pasta day",
     20: "Fusion meal",
+    21: "Mendokoro",
     22: "Rice-UP",
     23: "Octavo",
     27: "Science Lounge (ACHTUNG, in Basel)",
@@ -82,6 +83,7 @@ async function fetchPommes() {
 
     // Build API URL with required query parameters
     const url = `https://idapps.ethz.ch/cookpit-pub-services/v1/weeklyrotas?client-id=ethz-wcms&lang=${currentLang}&rs-first=0&rs-size=50&valid-after=${mondayStr}&valid-before=${mondayPlus14Str}`;
+    //FIX FOR OLD BROWSERS and/or samsung
     const res = await fetch(url);
     const data = await res.json();
 
