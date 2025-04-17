@@ -105,7 +105,7 @@ async function fetchPommes() {
               const meal = line["meal"] || {};
               const name = (meal["name"] || "").toLowerCase();
               const description = (meal["description"] || "").toLowerCase();
-              const image = meal["image-url"] ? `${meal["image-url"]}?client-id=ethz-wcms` : null;
+              const image = meal["image-url"] ? `${meal["image-url"]}?client-id=ethz-wcms` : ["./images/placeholder_pommes02_noBG.png"];
               if (name.includes(query) || description.includes(query)) {
                 matches.push({
                   mensa,
@@ -155,22 +155,36 @@ function updateUI() {
 
     // Render each result as a list item
     results.forEach((item) => {
+      
       const li = document.createElement("li");
-      li.className = "bg-white shadow-md rounded-lg p-4 text-left";
+      //li.className = "group bg-gray-50 hover:shadow-md rounded-lg p-4 text-left transition-all duration-200";
+      li.className = `
+      group-hover:opacity-50
+      hover:!opacity-100
+      group 
+      bg-gray-50
+      hover:shadow-md 
+      rounded-lg
+      p-4 
+      text-left 
+      transition-all 
+      duration-200
+    `;
+
 
       li.innerHTML = `
-        <div class="font-bold text-lg">${item.mensa}</div>
-        <div class="text-md font-semibold text-gray-800 mt-1">${highlightPommes(item.name)}</div>
-        <div class="text-gray-600 text-sm mt-1">${highlightPommes(item.description)}</div>
+        <div class="font-bold text-lg transition-colors">${item.mensa}</div>
+        <div class="text-md font-semibold text-gray-800 mt-1 hover:text-black-900 transition-colors">${highlightPommes(item.name)}</div>
+        <div class="text-gray-600 text-sm mt-1 hover:text-gray-900 transition-colors">${highlightPommes(item.description)}</div>
         ${
           item.studentPrice !== null
-            ? `<div class="text-sm text-gray-800 mt-2">💰 Preis (Studierende): CHF ${Number(item.studentPrice).toFixed(2)}</div>`
-            : ""
+          ? `<div class="text-sm text-gray-800 mt-2 hover:text-green-600 transition-colors">💰 Preis (Studierende): CHF ${Number(item.studentPrice).toFixed(2)}</div>`
+          : ""
         }
         ${
           item.image
-            ? `<img src="${item.image}" alt="Bild" class="mt-3 rounded-md w-full max-h-60 object-cover" />`
-            : ""
+          ? `<img src="${item.image}" alt="Bild" class="mt-3 rounded-md w-full max-h-60 object-cover hover:scale-[1.02] transition-transform duration-200" />`
+          : ""
         }
       `;
       resultsList.appendChild(li);

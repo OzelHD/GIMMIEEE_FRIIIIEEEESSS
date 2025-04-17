@@ -2,11 +2,11 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <title>Pommes Suche</title>
+    <title>Pommes Finder </title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="./icons/pommes_icon1.ico">
   </head>
-  <body class="bg-grey-50">    
+  <body class="bg-indigo-50"><!--dark:bg-gray-950-->
     <button id="langToggle">Sprache: Deutsch</button>
     
     <main
@@ -22,7 +22,10 @@
 
       <div id="messageContainer" class="mt-6"></div>
 
-      <ul id="resultsList" class="mt-4 space-y-6 w-full max-w-xl"></ul>
+      <!--<ul id="resultsList" class="mt-4 space-y-6 w-full max-w-xl"></ul>-->
+      <div id="resultsWrapper" class="group">
+        <ul id="resultsList" class="mt-4 space-y-6 w-full max-w-xl"></ul>
+      </div>
     </main>
 
     <script src="./code/fetch_query.js"></script>
